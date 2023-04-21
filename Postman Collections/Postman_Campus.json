@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "dcf7eeaa-717d-403f-8e9b-3f0a409b93ae",
+		"name": "Campus Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "603991a4-1b1e-47a9-a14b-1c5671175f2d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "a3e2bb1c-a387-491b-bd5e-f58420100d72",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"turkeyts\",\r\n    \"password\": \"TechnoStudy123\",\r\n    \"rememberMe\": \"true\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://test.mersys.io/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Country",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4c7d845b-6788-4415-8bbc-a16dec8ec90b",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"var ulkeAdi= pm.response.json().name;\r",
+							"pm.collectionVariables.set(\"countryName\", ulkeAdi);\r",
+							"\r",
+							"pm.collectionVariables.set(\"countryID\", pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "69284185-63ed-4cc2-8505-6c756c2a6489",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": null,\r\n  \"name\": \"{{$randomCountry}} - {{$randomInt}}\",\r\n  \"code\": \"{{$randomCountryCode}}\",\r\n  \"translateName\": [],\r\n  \"hasState\": false\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://test.mersys.io/school-service/api/countries"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Country Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "db2f2dfd-4324-46c4-bc56-164802c35bf4",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "36e2c140-991d-4064-a3c3-2111a70269f7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": null,\r\n  \"name\": \"{{countryName}}\",\r\n  \"code\": \"00\",\r\n  \"translateName\": [],\r\n  \"hasState\": false\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://test.mersys.io/school-service/api/countries"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Country",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "efb4f9da-c57a-40fe-ab22-c8e36d164c77",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "5bcf76f7-4a6f-4e94-bc00-8dbdb640c8df",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"{{countryID}}\",\r\n  \"name\": \"{{countryName}}\",\r\n  \"code\": \"11111111\",\r\n  \"translateName\": [],\r\n  \"hasState\": false\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://test.mersys.io/school-service/api/countries"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Country",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9dcf0568-620e-48c8-9c08-e77a2e9e811e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "150151cd-14f7-46a1-9e08-c0ceb390f395",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://test.mersys.io/school-service/api/countries/{{countryID}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Country Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2cc47fc5-d6b1-40ce-a8e8-5173e9952fb8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "f3754d9d-f98a-483c-9d84-113f5af54cad",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://test.mersys.io/school-service/api/countries/{{countryID}}"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "fdea3334-ad02-48f5-a0af-02e7162b2ac0",
+			"key": "countryName",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "70f45e99-fc6a-41f0-95d3-f585338c010e",
+			"key": "countryID",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
